@@ -16,10 +16,6 @@ module.exports = {
     'vue',
   ],
   rules: {
-    'no-param-reassign': ['off'],
-    'no-shadow': ['off'],
-    indent: ['error', 4],
-    "no-multiple-empty-lines": [2, {"max": 3, "maxBOF": 0}],
-    "function-paren-newline": ["error", { "minItems": 3 }]
-  },
+    "no-unused-vars": "off"
+  }
 };
