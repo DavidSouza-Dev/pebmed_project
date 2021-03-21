@@ -1,7 +1,4 @@
 module.exports = {
-  chainWebpack: config => {
-    config.module.rules.delete('eslint');
-  },
   root:false,
   env: {
     browser: true,
