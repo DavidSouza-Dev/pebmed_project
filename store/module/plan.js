@@ -39,14 +39,14 @@ const actions = {
                 commit('SET_PLAN', resJSON.map((e) => ({
                     id: e.id,
                     description: e.description,
-                    installments: e.installments, // parcelas
-                    discountAmmount: e.discountAmmount, // valor descontado
-                    discountCouponCode: e.discountCouponCode, // valido para plano anual
-                    discountPercentage: `-${e.discountPercentage === 0.1 ? e.discountPercentage * 100 : e.discountPercentage}%`, // porcentagem
-                    fullPrice: `R$ ${e.fullPrice.toFixed(2)}`, // valor De
-                    priceWithDiscount: `R$ ${(e.fullPrice - e.discountAmmount).toFixed(2)}`, // valor Para
-                    installmentsValue: `R$ ${((e.fullPrice - e.discountAmmount) / e.installments).toFixed(2)}`,
-                    valuePrice: e.fullPrice - e.discountAmmount,
+                    installments: e.installments, // Parcelas
+                    discountAmmount: e.discountAmmount, // Vscontado
+                    discountCouponCode: e.discountCouponCode, // Valido para plano anual
+                    discountPercentage: `-${e.discountPercentage === 0.1 ? e.discountPercentage * 100 : e.discountPercentage}%`, // Porcentagem
+                    fullPrice: `R$ ${e.fullPrice.toFixed(2)}`, // Valor De
+                    priceWithDiscount: `R$ ${(e.fullPrice - e.discountAmmount).toFixed(2)}`, // Valor Para
+                    installmentsValue: `R$ ${((e.fullPrice - e.discountAmmount) / e.installments).toFixed(2)}`, // Valor da Parcela
+                    valuePrice: e.fullPrice - e.discountAmmount, 
                     periodLabel: e.periodLabel,
                     period: e.period,
                     acceptsCoupon: e.acceptsCoupon,
@@ -54,12 +54,12 @@ const actions = {
                 commit('SET_CHOOSEN_PLAN', resJSON.map((e) => ({
                     id: e.id,
                     description: e.description,
-                    installments: e.installments, // parcelas
-                    discountAmmount: e.discountAmmount, // valor descontado
-                    discountCouponCode: e.discountCouponCode, // valido para plano anual
-                    discountPercentage: `-${e.discountPercentage}%`, // porcentagem
-                    fullPrice: `R$ ${e.fullPrice.toFixed(2)}`, // valor De
-                    priceWithDiscount: `R$ ${(e.fullPrice - e.discountAmmount).toFixed(2)}`, // valor Para
+                    installments: e.installments, // Parcelas
+                    discountAmmount: e.discountAmmount, // Valor descontado
+                    discountCouponCode: e.discountCouponCode, // Valido para plano anual
+                    discountPercentage: `-${e.discountPercentage}%`, // Porcentagem
+                    fullPrice: `R$ ${e.fullPrice.toFixed(2)}`, // Valor De
+                    priceWithDiscount: `R$ ${(e.fullPrice - e.discountAmmount).toFixed(2)}`, // Valor Para
                     installmentsValue: `R$ ${((e.fullPrice - e.discountAmmount) / e.installments).toFixed(2)}`,
                     valuePrice: e.fullPrice - e.discountAmmount,
                     periodLabel: e.periodLabel,

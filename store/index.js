@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import plano from './module/plano';
+import plano from './module/plan';
 import user from './module/user';
 
 Vue.use(Vuex);
