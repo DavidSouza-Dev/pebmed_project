@@ -12,13 +12,13 @@
             <div class="confirmation_details-plan">
                 <img src="../assets/icon-star.png" >
                 <div class="confirmation_details-plan-dscp">
-                    {{ user.period === 'annually' ?'Anual': 'Mensal'}}  |  {{ plan.description}}
+                    {{ user.plan.period === 'annually' ?'Anual': 'Mensal'}}  |  {{ plan.description}}
                     <div class="plans_item-prices">
                         <span class="plans_item-price">
                             {{  user.plan.amount }}
                         </span>
                         <span class="plans_item-price-installment">
-                            {{(user.plan.installments)}} x  R$ {{ user.plan.installmentValue }}
+                            {{(user.plan.installments)}}x  R$ {{ user.plan.installmentValue }}
                         </span>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
         </div>
 
         <a href="#" class="confirmation_goplan" @click="goPlans">Gerenciar assinatura</a>
-        <button class="confirmation_button btn btn--primary" @click="goPlans">IR PARA HOME</button>
+        <button class="confirmation_button btn--primary" @click="goPlans">IR PARA HOME</button>
   </div>
 </template>
 
@@ -130,6 +130,17 @@ export default {
                 div {
                     font-size: 13px;
                     margin-top: .5rem;
+                    span {
+                        &:nth-child(2) {
+                            &::before {
+                                content: '|';
+                                font-size: 14px;
+                                color:#181a44;
+                                margin: 0 3px;
+
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -176,6 +187,7 @@ export default {
         color: white;
         outline: none;
         transition: all 0.3s;
+        border: none;
         &:hover, &:active, &:focus {
             transition: background .3s, color .3s;
             color: white;
