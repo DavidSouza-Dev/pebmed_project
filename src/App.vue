@@ -68,7 +68,9 @@ input, .form-control{
     background-color: #ffffff;
     border: 1px solid transparent;
     border-bottom: 1px solid #F5F5F5;
+    border-radius: 0;
     color: #2E2E2E;
+    width: 100%;
     padding:0;
     transition: all .4s;
     border-radius: 0;
