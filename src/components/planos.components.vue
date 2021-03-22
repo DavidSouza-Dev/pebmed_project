@@ -4,8 +4,11 @@
             <h5 class="plans_title">Confira o seu plano:</h5>
             <p class="plans_mail">{{ user.email }}</p>
             <div v-for="(plan, index) in plans" :key="index" class="plans_item">
-                <label :for="plan.description">
-                    {{ plan.period === 'annually' ?'Anual': 'Mensal'}}  |  {{ plan.description}}
+                <label
+                    :for="plan.description == 'À vista' ? 'a_vista' : plan.description"
+                    :data-cy="plan.description"
+                >
+                    {{ plan.period === 'annually' ? 'Anual': 'Mensal'}}  |  {{ plan.description}}
                     <div class="plans_item-prices">
                         <span class="plans_item-prices-of">
                             De {{ plan.fullPrice}}
