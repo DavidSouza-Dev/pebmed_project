@@ -2,7 +2,8 @@
   <div class="confirmation">
         <button class="confirmation_return" @click="returnPage">
             <img src="../assets/icon-arrow-chevron.svg" alt="">
-            <img src="../assets/icon-loading.svg" width="55" v-if="loading">
+            <img src="../assets/icon-loading.svg" width="55"
+                :style="{opacity: loading ? 1 : 0}">
         </button>
         <img src="../assets/icon-logo.png" class="confirmation_icon-logo" width="45">
         <img src="../assets/icon-sucesso.png" class="confirmation_icon-sucesso" width="65">
@@ -35,8 +36,8 @@
             </div>
         </div>
 
-        <a href="#" class="confirmation_goplan" @click="goPlans">Gerenciar assinatura</a>
-        <button class="confirmation_button btn--primary" @click="goPlans">IR PARA HOME</button>
+        <a href="" class="confirmation_go-plan" @click="goPlans">Gerenciar assinatura</a>
+        <button class="confirmation_go-home btn--primary" @click="goPlans">IR PARA HOME</button>
   </div>
 </template>
 
@@ -60,12 +61,15 @@ export default {
         goPlans() {
             setTimeout(() => {
                 this.$router.replace('/');
+                this.$store.commit('SET_PLAN_CHECKOUT', true);
             }, 1000);
         },
         returnPage() {
             this.loading = !this.loading;
+            // Se voltar para tela anterior, ele reseta o plano contratado
             setTimeout(() => {
                 this.$router.replace('/payment');
+                this.$store.commit('SET_PLAN_CHECKOUT', true);
                 this.loading = !this.loading;
             }, 2000);
         },
@@ -167,7 +171,7 @@ export default {
         }
     }
 
-    &_goplan {
+    &_go-plan {
         color: #181a44;
         &:hover {
             color: inherit;
@@ -175,7 +179,7 @@ export default {
         }
     }
 
-    &_button {
+    &_go-home {
         margin: auto;
         margin-top: 2rem;
         background: #181a44;

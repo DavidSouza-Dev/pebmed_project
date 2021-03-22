@@ -9,6 +9,8 @@ const state = {
 
 const getters = {
     GET_USER: (state) => state.user,
+
+    GET_USER_PLAN: (state) => state.user.plan,
 };
 
 const mutations = {

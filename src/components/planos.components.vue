@@ -28,7 +28,7 @@
                 </label>
                 <input
                         type="radio"
-                        :id="plan.description"
+                        :id="plan.description == 'À vista' ? 'a_vista' : plan.description"
                         :name="plan.description"
                         :value="plan.description"
                         v-model="checked"
@@ -83,6 +83,7 @@ export default {
         },
         handleChoosePlan(value) {
             this.$store.commit('SET_CHOOSEN_PLAN', value);
+            this.$store.commit('SET_PLAN_CHECKOUT', false),
             this.$notify({
                 group: 'app',
                 type: 'success',

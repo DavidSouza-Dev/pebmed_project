@@ -2,7 +2,8 @@
   <div data-cy="find-test" class="main">
     <button class="main_return" @click="returnPage">
         <img src="../assets/icon-arrow-chevron.svg" alt="">
-        <img src="../assets/icon-loading.svg" width="55" v-if="loading">
+        <img src="../assets/icon-loading.svg" width="55"
+            :style="{opacity: loading ? 1 : 0}">
     </button>
     <div>
       <form
@@ -29,7 +30,7 @@
         <div class="user_payment__form--row">
           <label for="validade">Validade</label>
           <input
-            class="user_payment__form--validade 0"
+            class="user_payment__form--expiration 0"
             type="text"
             name="validade"
             v-model="validate"
@@ -148,6 +149,7 @@ export default {
         ...mapGetters({
             planChoosen: 'GET_CHOOSEN_PLAN',
             user: 'GET_USER',
+            confirmationCheckout: 'GET_PLAN_CHECKOUT'
         }),
     },
     created() {
@@ -165,6 +167,16 @@ export default {
             this.$store.commit('SET_CHOOSEN_INSTALLMENT', this.installment);
         },
         async validateBeforeSubmit() {
+            console.log('this.planUser',this.planUser )
+            if (this.confirmationCheckout === true) {
+                return this.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Solicite um plano a ser contratado',
+                    duration: 2000,
+                    ignoreDuplicates: true,
+                });
+            }
             if (
                 this.numberCard === null &&
                 this.nameCard == null &&
@@ -209,11 +221,11 @@ export default {
                     ignoreDuplicates: true,
                 });
             }
-            if (!this.validate) {
+            if (!(this.validate.length <= 5)) {
                 return this.$notify({
                     group: 'app',
                     type: 'error',
-                    title: 'Validade inválida',
+                    title: 'Preencha no formato 00/00',
                     duration: 2000,
                     ignoreDuplicates: true,
                 });

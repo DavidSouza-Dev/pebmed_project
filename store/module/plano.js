@@ -2,12 +2,15 @@ const state = {
     plan: null,
     choosenPlan: null,
     choosenInstallment: null,
+    confirmationPlan: false,
 };
 
 const getters = {
     GET_PLAN: (state) => state.plan,
 
     GET_CHOOSEN_PLAN: (state) => state.choosenPlan,
+
+    GET_PLAN_CHECKOUT: (state) => state.confirmationPlan,
 };
 
 const mutations = {
@@ -17,6 +20,10 @@ const mutations = {
 
     SET_CHOOSEN_PLAN: (state, choosenPlan) => {
         state.choosenPlan = choosenPlan;
+    },
+
+    SET_PLAN_CHECKOUT: (state, confirmationPlan) => {
+        state.confirmationPlan = confirmationPlan;
     },
 
     SET_CHOOSEN_INSTALLMENT: (state, choosenInstallment) => {
