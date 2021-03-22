@@ -18,19 +18,18 @@
         <div class="user_payment__form--row">
           <label for="numberCard">Número do cartão</label>
           <input
-            class="user_payment__form--numberCard form-control"
+            class="user_payment__form--numberCard 0"
             type="text"
             name="numberCard"
             v-model="numberCard"
             v-mask="'#### #### #### ####'"
             placeholder="0000 0000 0000 0000"
-            @blur="validateCard()"
           />
         </div>
         <div class="user_payment__form--row">
           <label for="validade">Validade</label>
           <input
-            class="user_payment__form--validade form-control"
+            class="user_payment__form--validade 0"
             type="text"
             name="validade"
             v-model="validate"
@@ -41,7 +40,7 @@
         <div class="user_payment__form--row">
           <label for="cvv">CVV</label>
           <input
-            class="user_payment__form--cvv form-control"
+            class="user_payment__form--cvv 0"
             type="text"
             name="cvv"
             v-mask="'###'"
@@ -52,7 +51,7 @@
         <div class="user_payment__form--row">
           <label for="nameCard">Nome impresso no cartão</label>
           <input
-            class="user_payment__form--nameCard form-control"
+            class="user_payment__form--nameCard 0"
             type="text"
             name="nameCard"
             v-model="nameCard"
@@ -62,7 +61,7 @@
         <div class="user_payment__form--row">
           <label for="CPF">CPF</label>
           <input
-            class="user_payment__form--cpf a form-control"
+            class="user_payment__form--cpf a 0"
             type="text"
             name="cpf"
             v-model="cpf"
@@ -73,7 +72,7 @@
         <div class="user_payment__form--row">
           <label for="cupom">Cupom</label>
           <input
-            class="user_payment__form--cupom form-control"
+            class="user_payment__form--cupom 0"
             type="text"
             name="cupom"
             v-model="cupom"
@@ -166,6 +165,32 @@ export default {
             this.$store.commit('SET_CHOOSEN_INSTALLMENT', this.installment);
         },
         async validateBeforeSubmit() {
+            if (
+                this.numberCard === null &&
+                this.nameCard == null &&
+                this.validate == null &&
+                this.cvv == null &&
+                this.cpf == null &&
+                this.installment == 'Selecionar'
+                ) {
+                return this.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Preencha os campos para finalizar',
+                    duration: 2000,
+                    ignoreDuplicates: true,
+                });
+            }
+            
+            if (this.numberCard === null) {
+                return this.$notify({
+                    group: 'app',
+                    type: 'error',
+                    title: 'Preencha o campo de cartão',
+                    duration: 2000,
+                    ignoreDuplicates: true,
+                });
+            }
             if ((this.numberCard.split(' ').join('').length < 16) && !!this.validateCard(this.numberCard.split(' ').join(''))) {
                 return this.$notify({
                     group: 'app',
@@ -227,7 +252,7 @@ export default {
                 creditCardCVV: this.cvv,
                 creditCardCPF: this.cpf.replace(/[\s.-]*/gim, ''),
                 gateway: 'iugu',
-                installments: this.installment, // setar um store para isso
+                installments: Number(this.installment), // setar um store para isso
                 couponCode: this.cupom,
             });
 
@@ -268,15 +293,18 @@ export default {
                 this.$router.replace('/confirmation');
             }, 2000);
         },
-        validateCard(nr) {
+        validateCard() {
             // https://www.creditcardvalidator.org/generator
-            nr = this.numberCard.split(' ').join('');
-            for (const cartao of this.cartoes) {
+            let nr = this.numberCard.split(' ').join('');
+            let cartoes = Object.entries(this.cartoes)
+            for (let i=0; i < cartoes.length; i++){
                 if (nr) {
-                    if (nr.match(this.cartoes[cartao])) return cartao
+                    if (nr.match(cartoes[i][1])) {
+                        return true
+                    }
                 }
             }
-            return false;
+            return false
         },
         rewrite(str) {
             if (!str) return;
@@ -377,7 +405,7 @@ export default {
         &__form {
             &--row {
                 text-align: left;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;
                 width: 100%;
                 &:nth-child(5) {
                     width: 43%;
