@@ -1,6 +1,6 @@
-import planos from './components/planos.components.vue';
-import pagamentos from './components/pagamentos.components.vue';
-import confirmacao from './components/confirmacao.components.vue';
+import planos from './pages/planos.pages.vue';
+import pagamentos from './pages/pagamentos.pages.vue';
+import confirmacao from './pages/confirmacao.pages.vue';
 
 /* Rotas */
 

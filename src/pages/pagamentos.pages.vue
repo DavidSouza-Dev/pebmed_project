@@ -149,7 +149,7 @@ export default {
         ...mapGetters({
             planChoosen: 'GET_CHOOSEN_PLAN',
             user: 'GET_USER',
-            confirmationCheckout: 'GET_PLAN_CHECKOUT'
+            confirmationCheckout: 'GET_PLAN_CHECKOUT',
         }),
     },
     created() {
@@ -167,7 +167,6 @@ export default {
             this.$store.commit('SET_CHOOSEN_INSTALLMENT', this.installment);
         },
         async validateBeforeSubmit() {
-            console.log('this.planUser',this.planUser )
             if (this.confirmationCheckout === true) {
                 return this.$notify({
                     group: 'app',
@@ -178,13 +177,13 @@ export default {
                 });
             }
             if (
-                this.numberCard === null &&
-                this.nameCard == null &&
-                this.validate == null &&
-                this.cvv == null &&
-                this.cpf == null &&
-                this.installment == 'Selecionar'
-                ) {
+                this.numberCard === null
+                && this.nameCard == null
+                && this.validate == null
+                && this.cvv == null
+                && this.cpf == null
+                && this.installment === 'Selecionar'
+            ) {
                 return this.$notify({
                     group: 'app',
                     type: 'error',
@@ -193,7 +192,7 @@ export default {
                     ignoreDuplicates: true,
                 });
             }
-            
+
             if (this.numberCard === null) {
                 return this.$notify({
                     group: 'app',
@@ -257,14 +256,14 @@ export default {
 
             const obj = JSON.stringify({
                 userId: this.user.userId,
-                offerId: this.planChoosen.id, // setar um store para isso
+                offerId: this.planChoosen.id,
                 creditCardNumber: this.numberCard.split(' ').join(''),
                 creditCardExpirationDate: this.validate,
                 creditCardHolder: this.nameCard,
                 creditCardCVV: this.cvv,
                 creditCardCPF: this.cpf.replace(/[\s.-]*/gim, ''),
                 gateway: 'iugu',
-                installments: Number(this.installment), // setar um store para isso
+                installments: Number(this.installment),
                 couponCode: this.cupom,
             });
 
@@ -272,15 +271,14 @@ export default {
                 description: this.planChoosen.description,
                 period: this.planChoosen.period,
                 amount: this.planChoosen.priceWithDiscount,
-                offerId: this.planChoosen.id, // setar um store para isso
+                offerId: this.planChoosen.id,
                 creditCardNumber: this.numberCard.split(' ').join(''),
                 creditCardExpirationDate: this.validate,
                 creditCardHolder: this.nameCard,
                 creditCardCVV: this.cvv,
                 creditCardCPF: this.cpf,
-                installments: Number(this.installment), // setar um store para isso
+                installments: Number(this.installment),
                 valuePrice: Number(this.planChoosen.valuePrice),
-                // eslint-disable-next-line max-len
                 installmentValue: (
                     Number(this.planChoosen.valuePrice) / Number(this.installment)
                 ).toFixed(2),
@@ -307,21 +305,19 @@ export default {
         },
         validateCard() {
             // https://www.creditcardvalidator.org/generator
-            let nr = this.numberCard.split(' ').join('');
-            let cartoes = Object.entries(this.cartoes)
-            for (let i=0; i < cartoes.length; i++){
+            const nr = this.numberCard.split(' ').join('');
+            const cartoes = Object.entries(this.cartoes);
+            for (let i = 0; i < cartoes.length; i++) {
                 if (nr) {
                     if (nr.match(cartoes[i][1])) {
-                        return true
+                        return true;
                     }
                 }
             }
-            return false
+            return false;
         },
         rewrite(str) {
             if (!str) return;
-
-            // eslint-disable-next-line consistent-return
             return str
                 .trim()
                 .replace(/(\s|_)+/, '')

@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <a href="" class="confirmation_go-plan" @click="goPlans">Gerenciar assinatura</a>
+        <a class="confirmation_go-plan" @click="goPlans">Gerenciar assinatura</a>
         <button class="confirmation_go-home btn--primary" @click="goPlans">IR PARA HOME</button>
   </div>
 </template>
@@ -57,19 +57,19 @@ export default {
             loading: false,
         };
     },
+    create(){
+        this.$store.commit('SET_PLAN_CHECKOUT', true);
+    },
     methods: {
         goPlans() {
             setTimeout(() => {
                 this.$router.replace('/');
-                this.$store.commit('SET_PLAN_CHECKOUT', true);
             }, 1000);
         },
         returnPage() {
             this.loading = !this.loading;
-            // Se voltar para tela anterior, ele reseta o plano contratado
             setTimeout(() => {
                 this.$router.replace('/payment');
-                this.$store.commit('SET_PLAN_CHECKOUT', true);
                 this.loading = !this.loading;
             }, 2000);
         },
@@ -173,6 +173,7 @@ export default {
 
     &_go-plan {
         color: #181a44;
+        cursor: pointer;
         &:hover {
             color: inherit;
             text-decoration: none;
