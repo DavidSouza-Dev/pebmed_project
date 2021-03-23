@@ -9,8 +9,7 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "cypress": "cypress open",
-    "deploy": "gh-pages -d dist"
+    "cypress": "cypress open"
   },
   "lint-staged": {
     "src/**/*.vue": [
@@ -65,9 +64,6 @@
       "no-unused-vars": "off"
     }
   },
-  "eslintIgnore": [
-    "pagamentos.components.vue"
-  ],
   "browserslist": [
     "> 1%",
     "last 2 versions",
