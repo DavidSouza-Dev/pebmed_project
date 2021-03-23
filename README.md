@@ -41,6 +41,7 @@ As principais tecnologias utilizadas nesta aplicação foram:
 ## API
 
 Para a consultar o plano, é consumida a API de [Planos](https://604b7df6ee7cb900176a23a7.mockapi.io/api/v1/offer).
+&nbsp;
 Para a submeter contratação de plano, é consumida a APIs de [Pagamento](https://604b7df6ee7cb900176a23a7.mockapi.io/api/v1/offer).
 
 ## FLUXO GRAMA DA APLICAÇÃO
